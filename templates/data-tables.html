@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="page-container">
+    <br>
+    <p class="page-title">DATA TABLES PAGE</p>
+    <br><br>
+    <!-- Nav tabs -->
+    <ul id="tabs" class="nav nav-tabs" role="tablist" data-tabs="tabs">
+        <li role="presentation" class="active"><a href="#cases" aria-controls="home" role="tab" data-toggle="tab">Cases</a></li>
+        <li role="presentation"><a href="#locations" aria-controls="locations" role="tab" data-toggle="tab">Locations</a></li>
+        <li role="presentation"><a href="#ranks" aria-controls="ranks" role="tab" data-toggle="tab">Ranks</a></li>
+        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="cases">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Case ID</th>
+                        <th style="width: 100px;">Case Date</th>
+                        <th style="width: 100px;">Case URL</th>
+                        <th>Status ID</th>
+                        <th>Case Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cases in cases %}
+                    <tr>
+                        <th>{{ cases.case_id }}</th>
+                        <td>{{ cases.c_date }}</td>
+                        <td><a target="_blank" href="{{ cases.c_url }}">Click Here</a></td>
+                        <td>{{ cases.status_id }}</td>
+                        <td>{{ cases.c_description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="locations">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Location ID</th>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>Latitude</th>
+                        <th>longitude</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for locations in locations %}
+                    <tr>
+                        <th>{{ locations.loc_id }}</th>
+                        <td>{{ locations.city }}</td>
+                        <td>{{ locations.zip }}</td>
+                        <td>{{ locations.lat}}</td>
+                        <td>{{ locations.long}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="ranks">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Rank ID</th>
+                        <th>Rank Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ranks in ranks %}
+                    <tr>
+                        <th>{{ ranks.rank_id }}</th>
+                        <td>{{ ranks.rank_name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="settings">.settings..</div>
+    </div>
+</div>
+    
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('#tabs').tab();
+    });
+</script>    
+{% endblock %}
