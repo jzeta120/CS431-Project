@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="page-container">
+    <p class="page-title">CHARTS PAGE</p>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Number of Police by Rank</h3>
+                </div>
+                <div id="police_rank_chart" class="panel-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">More Stuff</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">More Stuff</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">More Stuff</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    google.load('visualization', '1', {packages: ['corechart', 'bar']});
+    google.setOnLoadCallback(drawBasic);
+
+    function drawBasic() {
+
+        var data = google.visualization.arrayToDataTable([
+            ['Police Rank', 'Number of Police in Rank',],
+            {% for rank_number in rank_number %}
+                ['{{ rank_number.rank_name }}', {{ rank_number.NumberOfficers }}],
+            {% endfor %}
+        ]);
+
+        var options = {
+            title: 'How many police per rank',
+            width: 1000,
+            height: 500,
+            chartArea: {width: '60%'},
+            hAxis: {
+                title: 'Number of Officers in Rank',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Police Rank'
+            }
+        };
+
+        var chart = new google.visualization.BarChart(document.getElementById('police_rank_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+
+
+{% endblock %}
